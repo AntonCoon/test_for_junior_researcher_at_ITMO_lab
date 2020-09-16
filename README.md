@@ -22,5 +22,6 @@
 $ java -jar your_app.jar example.sam
 $ java -jar your_app.jar -bam TRUE example.bam
 ```  
-#### Пример SAM файла:
-Пример файла с выравниванем находится в ./sam_data
+#### Пример SAM файлов:
+Пример файлов с выравниванем находится в ./test_data/sam_files  
+Так же в ./test_data находится скрипт make_test_sam_files.sh, который может сгенерировать новые SAM файлы для тестирования. Для его запуска необходимо установить пакет biopython для python3, а так же [bwa](http://bio-bwa.sourceforge.net/).
