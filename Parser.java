@@ -102,7 +102,7 @@ public class Parser {
                         for (int j = 0; j < shift; j++) {
                             // проверяем, если ли отличающиеся
                             if (read.charAt(j + readIndex) != ref.charAt(j + refIndex)) {
-                                String key = refIndex + "; " + ref.charAt(refIndex + j) + "-->" + read.charAt(readIndex + j) + "; ";
+                                String key = (refIndex + j) + "; " + ref.charAt(refIndex + j) + "-->" + read.charAt(readIndex + j) + "; ";
                                 addToMap(hashMap, key, counter);
                                 //System.out.println(refIndex + "; " + ref.charAt(refIndex + j) + "-->" + read.charAt(readIndex + j) + ";");
                             }
