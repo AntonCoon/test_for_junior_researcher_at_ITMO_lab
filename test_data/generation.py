@@ -51,7 +51,7 @@ if __name__ == "__main__":
             )
             reads.write(">{}\n{}\n".format(idx, readSeq))
 
-    # reads only with any types of event
+    # reads with any types of event
     event_prob = 0.05
     events = {
         p: choice([Event.SUBSTITUTION, Event.DELETION, Event.INSERTION])
