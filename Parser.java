@@ -1,7 +1,5 @@
 import java.io.*;
-
 import htsjdk.samtools.*;
-
 import java.io.File;
 import java.util.*;
 
