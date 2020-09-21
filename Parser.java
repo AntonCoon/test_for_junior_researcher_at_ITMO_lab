@@ -1,5 +1,7 @@
 import java.io.*;
+
 import htsjdk.samtools.*;
+
 import java.io.File;
 import java.util.*;
 
@@ -49,16 +51,18 @@ public class Parser {
     private void writer(Map<String, List<Integer>> hashMap) {
         try {
             FileWriter writer = new FileWriter(this.outputFile);
-            Set<String> keySet = hashMap.keySet();
-            for (String key : keySet) {
-                List value = hashMap.get(key);
-                int length = value.size();
-                writer.write(key + length + "; " + value + '\n');
-            }
+            hashMap.forEach((k, v) -> {
+                try {
+                    writer.write(k + v.size() + "; " + v + '\n');
+                } catch (IOException ex) {
+                    System.out.println("Error while writing to output file!");
+                }
+            });
             writer.close();
-        } catch (Exception e) {
-            System.out.println("Error while writing to output file!");
+        } catch (Exception ex) {
+            System.out.println("Error while creating writer");
         }
+
     }
 
     private void addToMap(Map<String, List<Integer>> hashMap, String key, int readID) {
@@ -69,13 +73,13 @@ public class Parser {
         int refIndex = left - 1;
         int readIndex = 0;
         int shift;
-        String local = "";
+        StringBuilder local = new StringBuilder("");
         for (int i = 0; i < cigar.length(); i++) {
             char c = cigar.charAt(i);
             if (Character.isDigit(c)) {
-                local += c;
+                local.append(c);
             } else {
-                shift = Integer.parseInt(local);
+                shift = Integer.parseInt(local.toString());
                 String key;
                 switch (c) {
                     // на этой позиции два нуклеотида
@@ -113,7 +117,7 @@ public class Parser {
                     default:
                         System.out.println("Wrong letter in Cigar!");
                 }
-                local = "";
+                local.setLength(0);
             }
         }
     }
